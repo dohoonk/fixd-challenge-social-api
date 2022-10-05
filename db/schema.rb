@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_05_083552) do
+ActiveRecord::Schema.define(version: 2022_10_05_193923) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,20 @@ ActiveRecord::Schema.define(version: 2022_10_05_083552) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["post_id"], name: "index_comments_on_post_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "github_events", force: :cascade do |t|
+    t.string "event_type"
+    t.string "event_id"
+    t.string "repo_name"
+    t.datetime "event_created_at"
+    t.string "status"
+    t.integer "size"
+    t.integer "number"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_github_events_on_user_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -53,12 +67,14 @@ ActiveRecord::Schema.define(version: 2022_10_05_083552) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.decimal "average_rating", default: "0.0"
+    t.string "github_username"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
+  add_foreign_key "github_events", "users"
   add_foreign_key "posts", "users"
   add_foreign_key "ratings", "users"
   add_foreign_key "ratings", "users", column: "rater_id"
