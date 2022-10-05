@@ -1,4 +1,10 @@
 FactoryBot.define do
+  factory :comment do
+    user { nil }
+    post { nil }
+    message { "MyText" }
+  end
+
     factory :post do
         title { Faker::Lorem.sentence }
         body { Faker::Lorem.paragraph }
