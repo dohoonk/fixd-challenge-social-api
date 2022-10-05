@@ -1,9 +1,9 @@
 FactoryBot.define do
-  factory :rating do
-    user { nil }
-    rater { nil }
-    rating { "9.99" }
-  end
+    factory :rating do
+        association :user, factory: :user
+        association :rater, factory: :user
+        rating { 4.0 }
+    end
 
     factory :comment do
         association :user, factory: :user
