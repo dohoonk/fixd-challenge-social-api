@@ -13,13 +13,23 @@ class Api::V1::GithubEventsController < ApplicationController
                     created_at = payload["created_at"]
                     github_event = GithubEvent.create(event_type: event_type, event_id: event_id, repo_name: repo_name, event_created_at: created_at, user_id: 1)
                     
+                    ActivityLog.create(
+                        subject: github_event,
+                        name: "Created a new repo #{repo_name}",
+                        user: user
+                      )
                 when "PushEvent"
                     event_id = payload["id"]
                     size = payload["payload"]["size"]
                     repo_name = payload["repo"]["name"]
                     created_at = payload["created_at"]
                     github_event = GithubEvent.create(event_type: event_type, event_id: event_id, size: size, repo_name: repo_name, event_created_at: created_at, user_id: 1)
-
+                    
+                    ActivityLog.create(
+                        subject: github_event,
+                        name: "Pushed #{size} commits to #{repo_name}",
+                        user: user
+                      )
                 when "PullRequestEvent"
                     event_id = payload["id"]
                     status = payload["payload"]["action"]
@@ -27,7 +37,12 @@ class Api::V1::GithubEventsController < ApplicationController
                     repo_name = payload["repo"]["name"]
                     created_at = payload["created_at"]
                     github_event = GithubEvent.create(event_type: event_type, event_id: event_id, status: status, number: number, repo_name: repo_name, event_created_at: created_at, user_id: 1)
-
+                    
+                    ActivityLog.create(
+                        subject: github_event,
+                        name: "Created a new repo #{repo_name}",
+                        user: user
+                      )
                 else
                     puts "Oooh, something new from GitHub: #{event_type}"
                 end
