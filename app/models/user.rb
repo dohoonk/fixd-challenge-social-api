@@ -9,4 +9,5 @@ class User < ApplicationRecord
   has_many :comments
   has_many :rating
   has_many :rating_raters, class_name: 'Rating', foreign_key: 'rater_id'
+  has_many :github_events
 end
