@@ -3,9 +3,7 @@ class Api::V1::RatingsController < ApplicationController
         rating = Rating.new(rating_params)
    
         if rating.save
-            # WIP to be refactored
-            new_rating = Rating.where(user_id: params[:user_id]).average(:rating)
-
+            AverageRatingCreator.new(params[:rating][:user_id], params[:rating][:rater_id]).call
             render json: rating, status: :created
         else
             render json: rating.errors, status: :unprocessable_entity
