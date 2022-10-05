@@ -1,8 +1,7 @@
 class ActivityLogCreator
-    def initialize(subject, user_id, name)
+    def initialize(subject, user_id)
         @subject = subject
         @user_id = user_id
-        @name    = name
     end
 
     def call
