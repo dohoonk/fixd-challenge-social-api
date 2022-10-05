@@ -1,4 +1,11 @@
 FactoryBot.define do
+  factory :activity_log do
+    user { nil }
+    subject_id { nil }
+    subject_type { nil }
+    name { "MyString" }
+  end
+
     factory :github_event do
         association :user, factory: :user
         event_type { Faker::Lorem.sentence }
