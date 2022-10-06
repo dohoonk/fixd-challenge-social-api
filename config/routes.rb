@@ -6,7 +6,6 @@ Rails.application.routes.draw do
       resources :posts, only: [:create]
       resources :comments, only: [:create, :destroy]
       resources :ratings, only: [:create]
-      resources :github_events, only: [:create]
       resources :feeds, only: :index
     end
   end
