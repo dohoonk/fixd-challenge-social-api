@@ -94,7 +94,7 @@
             - Params:
                 - user_id:integer required
                 - ex:
-                - get '/api/v1/feeds/:id', params: {
+                - get '/api/v1/feeds?user_id=1', params: {
                     user_id:integer required 
                 }
 
