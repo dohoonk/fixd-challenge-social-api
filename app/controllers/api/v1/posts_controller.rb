@@ -3,7 +3,6 @@ class Api::V1::PostsController < ApplicationController
         post = Post.new(post_params)
         
         if post.save
-            ActivityLogCreator.new(post, post.user_id).call
             render json: post, status: :created
         else
             render json: post.errors, status: :unprocessable_entity

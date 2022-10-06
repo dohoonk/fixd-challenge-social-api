@@ -49,7 +49,6 @@ class GithubEventCreator
             event_created_at: created_at, 
             user_id: 1
         )
-        ActivityLogCreator.new(github_event, github_event.user.id).call
     end
 
     def push_event_create(event_type,payload)
@@ -66,7 +65,6 @@ class GithubEventCreator
             branch_ref: branch_ref, 
             user_id: 1
         )
-        ActivityLogCreator.new(github_event, github_event.user.id).call
     end 
 
     def pull_request_event_create(event_type,payload)
@@ -84,6 +82,5 @@ class GithubEventCreator
             event_created_at: created_at, 
             user_id: 1
         )
-        ActivityLogCreator.new(github_event, github_event.user.id).call
     end
 end
