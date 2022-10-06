@@ -63,6 +63,7 @@ class GithubEventCreator
             size: size,
             repo_name: repo_name,
             event_created_at: created_at,
+            branch_ref: branch_ref, 
             user_id: 1
         )
     end 
