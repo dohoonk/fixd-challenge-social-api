@@ -26,14 +26,14 @@ class GithubEventCreator
         payloads.each do |payload|
             event_type = payload["type"]
             case event_type
-                when "CreateEvent"
-                    create_event_create(event_type,payload)
-                when "PushEvent"
-                    push_event_create(event_type,payload)
-                when "PullRequestEvent"
-                    pull_request_event_create(event_type,payload)
-                else
-                    puts "Oooh, something new from GitHub: #{event_type}"
+            when "CreateEvent"
+                create_event_create(event_type,payload)
+            when "PushEvent"
+                push_event_create(event_type,payload)
+            when "PullRequestEvent"
+                pull_request_event_create(event_type,payload)
+            else
+                puts "Oooh, something new from GitHub: #{event_type}"
             end
         end
     end
