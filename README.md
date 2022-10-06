@@ -37,6 +37,16 @@
                           } 
                       }
 
+        - GET /api/v1/posts:id
+            - Responds with json object
+            - Params:
+                - user_id:integer required
+                - ex:
+                - get '/api/v1/posts:id', params: {
+                    user_id:integer required 
+                }
+
+
     - Resouces Comments
         - POST /api/v1/comments
             - Creates comments objects
@@ -53,7 +63,7 @@
                           } 
                         }
 
-        - DELETE /api/v1/comment:id
+        - DELETE /api/v1/comments:id
             - Destroys comments objects
             - Params:
                 - comment_id:integer required
@@ -77,12 +87,16 @@
                     }
                 }
 
+
      - Resources Feeds
         - GET /api/v1/feeds
             - Responds with json object
             - Params:
                 - user_id:integer required
                 - ex:
-                - get '/api/v1/feeds', params: {
+                - get '/api/v1/feeds/:id', params: {
                     user_id:integer required 
                 }
+
+    
+
