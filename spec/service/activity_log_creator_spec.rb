@@ -3,14 +3,11 @@ require 'rails_helper'
 RSpec.describe ActivityLogCreator do
     describe '#call' do
         context 'after comment create' do
-            let!(:comment){ FactoryBot.create(:comment)}
+            let(:comment){ FactoryBot.create(:comment)}
 
-            before do
-                ActivityLogCreator.new(comment, comment.user_id).call
-            end
-
-            it 'creates a activity_log' do
-                expect(ActivityLog.count).to eq(1)
+            # One from post test case and one from comment
+            it 'creates a activity_log from after_create call back' do
+                expect(ActivityLog.count).to eq(2)
             end
 
             it 'creates a activity_log with subject comment' do
@@ -19,13 +16,9 @@ RSpec.describe ActivityLogCreator do
         end 
 
         context 'after post create' do
-            let!(:post){ FactoryBot.create(:post)}
+            let(:post){ FactoryBot.create(:post)}
 
-            before do
-                ActivityLogCreator.new(post, post.user_id).call
-            end
-
-            it 'creates a activity_log' do
+            it 'creates a activity_log from after_create call back' do
                 expect(ActivityLog.count).to eq(1)
             end
 
@@ -35,7 +28,7 @@ RSpec.describe ActivityLogCreator do
         end 
 
         context 'after rating create' do
-            let!(:rating){ FactoryBot.create(:rating)}
+            let(:rating){ FactoryBot.create(:rating)}
 
             before do
                 ActivityLogCreator.new(rating, rating.user_id).call
@@ -51,13 +44,9 @@ RSpec.describe ActivityLogCreator do
         end 
 
         context 'after github_event create' do
-            let!(:github_event){ FactoryBot.create(:github_event)}
+            let(:github_event){ FactoryBot.create(:github_event)}
 
-            before do
-                ActivityLogCreator.new(github_event, github_event.user_id).call
-            end
-
-            it 'creates a activity_log' do
+            it 'creates a activity_log from after_create call back' do
                 expect(ActivityLog.count).to eq(1)
             end
 
