@@ -16,6 +16,7 @@ class ActivityLogCreator
             subject: @subject,
             name: find_name,
             user_id: @user_id
+         )
     end
 
     def find_name
@@ -36,9 +37,15 @@ class ActivityLogCreator
     def githube_event_name_generator
         case @subject.event_type
         when "CreateEvent"
-            @name = "Created a new repository to #{@subject.repo_name}"
+            @name = "Created a new repository #{@subject.repo_name}"
         when "PushEvent"
             @name = "Pushed #{@subject.size} commits to #{@subject.repo_name}"
         when "PullRequestEvent"
+            if @subject.status == 'open'
+                @name = "Merged #{"#" + @subject.number.to_s} into #{@subject.repo_name}"
+            else
+                @name = "Opened a new Pull Request #{"#" + @subject.number.to_s}"
+            end
+        end
     end
 end
