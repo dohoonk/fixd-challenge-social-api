@@ -93,10 +93,11 @@
         - GET /api/v1/feeds/:id
             - Responds with json object
             - Params:
-                - user_id:integer required
+                - id:integer required
                 - ex:
-                - get '/api/v1/feeds?user_id=1', params: {
-                    user_id:integer required 
+                - get '/api/v1/feeds/1?page=2', params: {
+                    id:integer,
+                    page:integer
                 }
 
     
