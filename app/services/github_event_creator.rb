@@ -9,8 +9,6 @@ class GithubEventCreator
         self.get_github_event
     end
 
-    private 
-
     def get_github_event
         user = User.find(@user_id)
         request = Faraday.get("https://api.github.com/users/#{user.github_username}/events/public")
@@ -38,16 +36,19 @@ class GithubEventCreator
         end
     end
 
+    private 
+
+
     def create_event_create(event_type,payload)
         event_id = payload["id"]
         repo_name = payload["repo"]["name"]
         created_at = payload["created_at"]
-        github_event = GithubEvent.create(
+        GithubEvent.create(
             event_type: event_type, 
             event_id: event_id, 
             repo_name: repo_name, 
             event_created_at: created_at, 
-            user_id: 1
+            user_id: @user_id
         )
     end
 
@@ -57,13 +58,13 @@ class GithubEventCreator
         repo_name = payload["repo"]["name"]
         created_at = payload["created_at"]
         branch_ref = payload['payload']['ref']
-        github_event = GithubEvent.create(event_type: event_type,
+        GithubEvent.create(event_type: event_type,
             event_id: event_id,
             size: size,
             repo_name: repo_name,
             event_created_at: created_at,
             branch_ref: branch_ref, 
-            user_id: 1
+            user_id: @user_id
         )
     end 
 
@@ -73,14 +74,14 @@ class GithubEventCreator
         number = payload["payload"]["number"]
         repo_name = payload["repo"]["name"]
         created_at = payload["created_at"]
-        github_event = GithubEvent.create(
+        GithubEvent.create(
             event_type: event_type, 
             event_id: event_id, 
             status: status, 
             number: number, 
             repo_name: repo_name, 
             event_created_at: created_at, 
-            user_id: 1
+            user_id: @user_id
         )
     end
 end
