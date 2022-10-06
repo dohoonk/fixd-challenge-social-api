@@ -11,6 +11,7 @@
     rspec-rails
     factory_bot_rails
     faker
+    kaminari
 
 * How to run the test suite
     rspec
@@ -89,7 +90,7 @@
 
 
      - Resources Feeds
-        - GET /api/v1/feeds
+        - GET /api/v1/feeds/:id
             - Responds with json object
             - Params:
                 - user_id:integer required
