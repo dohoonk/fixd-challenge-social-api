@@ -11,5 +11,5 @@ class User < ApplicationRecord
   has_many :rating_raters, class_name: 'Rating', foreign_key: 'rater_id'
   has_many :github_events
   has_many :activity_logs
-  
+
 end

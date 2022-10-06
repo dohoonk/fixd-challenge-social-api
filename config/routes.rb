@@ -6,7 +6,7 @@ Rails.application.routes.draw do
       resources :posts, only: [:create, :show]
       resources :comments, only: [:create, :destroy]
       resources :ratings, only: [:create]
-      resources :feeds, only: :index
+      resources :feeds, only: :show
     end
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
