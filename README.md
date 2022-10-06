@@ -13,13 +13,13 @@
     faker
     kaminari
 
+* Deployment instructions
+    bundle install
+    rails db:drop db:create db:migrate db:seed
+
 * How to run the test suite
     rspec
     - Test was designed without seed file and uses factory_bor_rails to create fixtures
-
-* Deployment instructions
-    bundle install
-    rails db:create db:migrate
 
 * API Endpoints
     - Resources Post
