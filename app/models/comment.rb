@@ -4,6 +4,9 @@ class Comment < ApplicationRecord
   belongs_to :user
   belongs_to :post
 
+  # Validations
+  validates :message, presence: true
+
   after_create :create_activity_log
 
 end
