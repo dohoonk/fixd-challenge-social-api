@@ -26,14 +26,14 @@ class GithubEventCreator
         payloads.each do |payload|
             event_type = payload["type"]
             case event_type
-                when "CreateEvent"
-                    create_event_create(event_type,payload)
-                when "PushEvent"
-                    push_event_create(event_type,payload)
-                when "PullRequestEvent"
-                    pull_request_event_create(event_type,payload)
-                else
-                    puts "Oooh, something new from GitHub: #{event_type}"
+            when "CreateEvent"
+                create_event_create(event_type,payload)
+            when "PushEvent"
+                push_event_create(event_type,payload)
+            when "PullRequestEvent"
+                pull_request_event_create(event_type,payload)
+            else
+                puts "Oooh, something new from GitHub: #{event_type}"
             end
         end
     end
@@ -42,7 +42,13 @@ class GithubEventCreator
         event_id = payload["id"]
         repo_name = payload["repo"]["name"]
         created_at = payload["created_at"]
-        github_event = GithubEvent.create(event_type: event_type, event_id: event_id, repo_name: repo_name, event_created_at: created_at, user_id: 1)
+        github_event = GithubEvent.create(
+            event_type: event_type, 
+            event_id: event_id, 
+            repo_name: repo_name, 
+            event_created_at: created_at, 
+            user_id: 1
+        )
     end
 
     def push_event_create(event_type,payload)
@@ -50,7 +56,15 @@ class GithubEventCreator
         size = payload["payload"]["size"]
         repo_name = payload["repo"]["name"]
         created_at = payload["created_at"]
-        github_event = GithubEvent.create(event_type: event_type, event_id: event_id, size: size, repo_name: repo_name, event_created_at: created_at, user_id: 1)
+        branch_ref = payload['payload']['ref']
+        github_event = GithubEvent.create(event_type: event_type,
+            event_id: event_id,
+            size: size,
+            repo_name: repo_name,
+            event_created_at: created_at,
+            branch_ref: branch_ref, 
+            user_id: 1
+        )
     end 
 
     def pull_request_event_create(event_type,payload)
@@ -59,6 +73,14 @@ class GithubEventCreator
         number = payload["payload"]["number"]
         repo_name = payload["repo"]["name"]
         created_at = payload["created_at"]
-        github_event = GithubEvent.create(event_type: event_type, event_id: event_id, status: status, number: number, repo_name: repo_name, event_created_at: created_at, user_id: 1)
+        github_event = GithubEvent.create(
+            event_type: event_type, 
+            event_id: event_id, 
+            status: status, 
+            number: number, 
+            repo_name: repo_name, 
+            event_created_at: created_at, 
+            user_id: 1
+        )
     end
 end

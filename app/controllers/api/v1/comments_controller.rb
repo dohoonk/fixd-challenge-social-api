@@ -2,6 +2,7 @@ class Api::V1::CommentsController < ApplicationController
     before_action :set_post, only: :create
 
     def create
+    
         comment = @post.comments.build(comment_params)
 
         if comment.save
