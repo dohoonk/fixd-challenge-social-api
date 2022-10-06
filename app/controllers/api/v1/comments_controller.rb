@@ -5,6 +5,8 @@ class Api::V1::CommentsController < ApplicationController
         comment = @post.comments.build(comment_params)
 
         if comment.save
+            ActivityLogCreator.new(comment, comment.user_id).call
+
             render json: comment, status: :created
         else
             render json: comment.errors, status: :unprocessable_entity
