@@ -39,7 +39,7 @@ RSpec.describe 'Comments', type: :request do
         end
     end
 
-    describe 'DELETE /comments' do
+    describe 'DELETE /comment' do
         context 'with valid parameters' do
 			let!(:comment) { FactoryBot.create(:comment) }
             

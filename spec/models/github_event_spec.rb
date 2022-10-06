@@ -7,7 +7,7 @@ RSpec.describe GithubEvent, type: :model do
   describe "validation" do
     it "Should not let github_event to be created with same event_id with same user_id" do
       github_event_2.user_id = github_event_1.user_id
-      expect(github_event_2).to be_valid
+      expect(github_event_2).to_not be_valid
     end
 
   end
