@@ -31,6 +31,7 @@ class GithubEventCreator
             when "PushEvent"
                 push_event_create(event_type,payload)
             when "PullRequestEvent"
+                byebug
                 pull_request_event_create(event_type,payload)
             else
                 puts "Oooh, something new from GitHub: #{event_type}"
@@ -56,6 +57,7 @@ class GithubEventCreator
         size = payload["payload"]["size"]
         repo_name = payload["repo"]["name"]
         created_at = payload["created_at"]
+        branch_ref = payload['payload']['ref']
         github_event = GithubEvent.create(event_type: event_type,
             event_id: event_id,
             size: size,

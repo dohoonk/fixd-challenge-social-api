@@ -27,9 +27,18 @@ class ActivityLogCreator
         when "Rating"
             @name = "Passed 4 stars!"
         when "GithubEvent"
-            @name = "Passed 4 stars!"
+            githube_event_name_generator
         else
             @name = "This is something new"
         end
     end 
+
+    def githube_event_name_generator
+        case @subject.event_type
+        when "CreateEvent"
+            @name = "Created a new repository to #{@subject.repo_name}"
+        when "PushEvent"
+            @name = "Pushed #{@subject.size} commits to #{@subject.repo_name}"
+        when "PullRequestEvent"
+    end
 end
